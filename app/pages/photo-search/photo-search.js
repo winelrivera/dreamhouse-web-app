@@ -1,6 +1,6 @@
-import {OnInit} from '@angular/core';
 import {Page, NavController} from 'ionic-angular';
 import {SearchService} from '../../services/search-service';
+import {PhotoSearchPropertyListPage} from './photo-search-property-list';
 
 @Page({
     templateUrl: 'build/pages/photo-search/photo-search.html'
@@ -15,11 +15,6 @@ export class PhotoSearchPage {
         this.nav = nav;
         this.searchService = searchService;
         this.searching = false;
-        this.probabilities = [];
-    }
-
-    ngOnInit() {
-
     }
 
     photoSelected(event) {
@@ -27,15 +22,11 @@ export class PhotoSearchPage {
         var file = event.target.files[0];
 
         this.searching = true;
-        this.probabilities = [];
 
         this.searchService.findByImage(file, function(json) {
             that.searching = false;
-            that.probabilities = json.probabilities.map(function(probability) {
-                return {
-                    label: probability.label,
-                    probability: Math.round(probability.probability * 100)
-                }
+            that.nav.push(PhotoSearchPropertyListPage, {
+                properties: json
             });
         });
     }

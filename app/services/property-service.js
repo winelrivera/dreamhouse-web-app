@@ -6,7 +6,7 @@ import 'rxjs/Rx';
     Prettify objects returned from Salesforce. This is optional, but it allows us to keep the templates independent
     from the Salesforce specific naming convention. This could also be done Salesforce-side by creating a custom REST service.
  */
-let prettifyProperty = (property) => {
+export let prettifyProperty = (property) => {
     let prettyProperty = {
         id: property.sfid,
         title: property.title__c,

@@ -46,10 +46,37 @@ client.query('SELECT * FROM salesforce.broker__c', function(error, data) {
   }
 });
 
+function getAllProperties(callback) {
+  client.query('SELECT * FROM ' + propertyTable, function(error, data) {
+    callback(data.rows);
+  });
+}
+
+var propertiesWithProbabilities = [];
+
+// get the property style for each property from the Dreamhouse Einstein Vision service
+getAllProperties(function(properties) {
+  propertiesWithProbabilities = properties;
+
+  propertiesWithProbabilities.forEach(function(property) {
+    var url = dreamhouseEinsteinVisionUrl + "/predict-from-url?sampleLocation=" + property.picture__c;
+
+    require('request').post({url: url}, function (err, httpResponse, body) {
+      try {
+        var json = JSON.parse(body);
+        property.probabilities = json.probabilities;
+      }
+      catch (error) {
+        property.probabilities = [];
+      }
+    });
+  });
+});
+
 
 app.get('/property', function(req, res) {
-  client.query('SELECT * FROM ' + propertyTable, function(error, data) {
-    res.json(data.rows);
+  getAllProperties(function(properties) {
+    res.json(properties);
   });
 });
 
@@ -111,7 +138,33 @@ app.post('/search', function(req, res) {
       res.send(err);
     }
     else {
-      res.send(body);
+      var json = JSON.parse(body);
+
+      // find the properties that most closely match the predictions
+      var predictionsWithScores = propertiesWithProbabilities.map(function(property) {
+        var score = property.probabilities.reduce(function(acc, val) {
+
+          var propertyProbability = val.probability;
+          var uploadProbability = json.probabilities.find(function(probability) { return probability.label == val.label }).probability;
+
+          return acc + Math.pow(propertyProbability + uploadProbability, 2);
+        }, 0);
+        property.score = score;
+
+        return property;
+      });
+
+      predictionsWithScores.sort(function(a, b) {
+        if (a.score > b.score) {
+          return -1;
+        }else if (a.score < b.score) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+
+      res.send(predictionsWithScores.slice(0, 5));
     }
   });
 });
