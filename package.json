@@ -38,7 +38,7 @@
     "ionic-gulp-sass-build": "1.0.0",
     "ionic-gulp-scripts-copy": "2.0.0",
     "run-sequence": "1.1.5",
-    "no-kafka": "git://github.com/crcastle/kafka.git#3.0"
+    "no-kafka": "3.2.2"
   },
   "cordovaPlugins": [
     "cordova-plugin-device",

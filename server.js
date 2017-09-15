@@ -11,15 +11,22 @@ app.use(express.static(path.join('www', 'build')));
 
 app.use(bodyParser.json());
 
-var brokerUrls = process.env.KAFKA_URL.replace(/\+ssl/g,'');
+//var brokerUrls = process.env.KAFKA_URL.replace(/\+ssl/g,'');
+var kafkaPrefix = process.env.KAFKA_PREFIX;
+if (kafkaPrefix === undefined) {
+  kafkaPrefix = '';
+}
 
-var producer = new Kafka.Producer({
+var producer = new Kafka.Producer(
+/*
+  {
   connectionString: brokerUrls,
   ssl: {
-    certFile: './client.crt',
+    cert: process.env.KAFKA_,
     keyFile: './client.key'
   }
-});
+}
+*/);
 
 producer.init();
 
@@ -37,6 +44,13 @@ var favoriteTable = 'favorite__c';
 var brokerTable = 'broker__c';
 var user__c = null;
 
+function lookupUser() {
+  client.query('SELECT user__c FROM ' + favoriteTable + ' GROUP BY user__c', function(error, data) {
+    console.log(error, data);
+    user__c = data.rows[Math.floor(Math.random() * data.rows.length)].user__c;
+  });
+}
+
 // setup the demo data if needed
 client.query('SELECT * FROM salesforce.broker__c', function(error, data) {
   if (error !== null) {
@@ -45,6 +59,8 @@ client.query('SELECT * FROM salesforce.broker__c', function(error, data) {
         console.log('Loading Demo Data...');
         require('./db/demo.js')(client);
         console.log('Done Loading Demo Data!');
+
+        lookupUser();
       }
     });
   }
@@ -53,13 +69,10 @@ client.query('SELECT * FROM salesforce.broker__c', function(error, data) {
     propertyTable = schema + 'property__c';
     favoriteTable = schema + 'favorite__c';
     brokerTable = schema + 'broker__c';
+
+    lookupUser();
   }
-
-  client.query('SELECT user__c FROM ' + favoriteTable + ' GROUP BY user__c', function(error, data) {
-    user__c = data.rows[Math.floor(Math.random() * data.rows.length)].user__c;
-  });
 });
-
 
 function sendInteraction(propertyId, eventType) {
   var data = {
@@ -70,7 +83,7 @@ function sendInteraction(propertyId, eventType) {
   };
 
   producer.send({
-    topic: 'interactions',
+    topic: kafkaPrefix + 'interactions',
     message: {
       value: JSON.stringify(data)
     }

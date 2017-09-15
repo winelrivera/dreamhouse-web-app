@@ -17,18 +17,16 @@ Run on Heroku:
 
 1. Create a Kafka topic:
 
-        heroku kafka:topics:create -a HEROKU_APP_NAME interactions
+        heroku kafka:topics:create interactions -a HEROKU_APP_NAME
 
 1. Check out the app: `http://HEROKU_APP_NAME.herokuapp.com`
 1. Check out the events as you view properties in the web app:
 
-        heroku kafka:topics:tail -a HEROKU_APP_NAME interactions
+        heroku kafka:topics:tail interactions -a HEROKU_APP_NAME
 
 Run Locally:
 
-1. [Install and start Postgres](https://wiki.postgresql.org/wiki/Detailed_installation_guides)
 1. [Install Node.js](https://nodejs.org/en/)
-1. Create a database in Postgres named `dreamhouse`
 1. [Install gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md)
 1. Fetch the NPM dependencies: `npm install`
 1. Get the Kafka environment variables from a Heroku app:
@@ -38,13 +36,8 @@ Run Locally:
         source .env
         set +o allexport
 
-1. Create the Kafka certs:
-
-        ./env.sh
-
 1. Start the app: `gulp serve`
 1. Check out the app: [http://localhost:8200/](http://localhost:8200/)
-
 
 Use Heroku Connect:
 
