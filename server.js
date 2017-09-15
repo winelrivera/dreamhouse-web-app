@@ -17,16 +17,7 @@ if (kafkaPrefix === undefined) {
   kafkaPrefix = '';
 }
 
-var producer = new Kafka.Producer(
-/*
-  {
-  connectionString: brokerUrls,
-  ssl: {
-    cert: process.env.KAFKA_,
-    keyFile: './client.key'
-  }
-}
-*/);
+var producer = new Kafka.Producer();
 
 producer.init();
 
