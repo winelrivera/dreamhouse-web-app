@@ -1,7 +1,6 @@
 module.exports = function(client) {
 
   client.query(`CREATE TABLE broker__c (
-   id SERIAL NOT NULL,
    sfid CHARACTER VARYING(18) UNIQUE,
    name CHARACTER VARYING(80),
    email__c CHARACTER VARYING(80),
@@ -12,7 +11,6 @@ module.exports = function(client) {
   );`);
 
   client.query(`CREATE TABLE property__c (
-   id SERIAL NOT NULL,
    sfid CHARACTER VARYING(18) UNIQUE,
    name CHARACTER VARYING(80),
    thumbnail__c CHARACTER VARYING(255),
@@ -32,7 +30,7 @@ module.exports = function(client) {
   );`);
 
   client.query(`CREATE TABLE favorite__c (
-   id SERIAL NOT NULL,
+   id__c uuid DEFAULT uuid_generate_v4(),
    sfid CHARACTER VARYING(18) UNIQUE,
    property__c CHARACTER VARYING(18) REFERENCES property__c(sfid)
   );`);
