@@ -1,9 +1,9 @@
-var path = require('path');
-var express = require('express');
-var bodyParser = require('body-parser');
-var pg = require('pg');
+const path = require('path');
+const express = require('express');
+const bodyParser = require('body-parser');
+const pg = require('pg');
 
-var app = express();
+const app = express();
 
 app.use(express.static('www'));
 app.use(express.static(path.join('www', 'build')));
@@ -11,13 +11,13 @@ app.use(express.static(path.join('www', 'build')));
 app.use(bodyParser.json());
 
 
-var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/dreamhouse';
+const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/dreamhouse';
 
 if (process.env.DATABASE_URL !== undefined) {
   pg.defaults.ssl = true;
 }
 
-var client = new pg.Client(connectionString);
+const client = new pg.Client(connectionString);
 client.connect();
 
 var propertyTable = 'property__c';
@@ -36,7 +36,7 @@ client.query('SELECT * FROM salesforce.broker__c', function(error, data) {
     });
   }
   else {
-    var schema = 'salesforce.';
+    const schema = 'salesforce.';
     propertyTable = schema + 'property__c';
     favoriteTable = schema + 'favorite__c';
     brokerTable = schema + 'broker__c';
@@ -45,9 +45,19 @@ client.query('SELECT * FROM salesforce.broker__c', function(error, data) {
 
 
 app.get('/property', function(req, res) {
-  client.query('SELECT * FROM ' + propertyTable, function(error, data) {
+
+  const dataToResponse = function(error, data) {
     res.json(data.rows);
-  });
+  };
+
+  if (req.query.key !== undefined) {
+    const pattern = '%' + req.query.key + '%';
+    client.query('SELECT * FROM ' + propertyTable + ' WHERE title__c ILIKE $1', [pattern], dataToResponse);
+  }
+  else {
+    client.query('SELECT * FROM ' + propertyTable, dataToResponse);
+  }
+
 });
 
 app.get('/property/:id', function(req, res) {
@@ -88,7 +98,7 @@ app.get('/broker/:sfid', function(req, res) {
   });
 });
 
-var port = process.env.PORT || 8200;
+const port = process.env.PORT || 8200;
 
 app.listen(port);
 

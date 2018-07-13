@@ -12,9 +12,8 @@ Run Locally:
 1. [Install and start Postgres](https://wiki.postgresql.org/wiki/Detailed_installation_guides)
 1. [Install Node.js](https://nodejs.org/en/)
 1. Create a database in Postgres named `dreamhouse`
-1. [Install gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md)
 1. Fetch the NPM dependencies: `npm install`
-1. Start the app: `gulp serve`
+1. Start the app: `npm run dev`
 1. Check out the app: [http://localhost:8200/](http://localhost:8200/)
 
 Run on Heroku:
