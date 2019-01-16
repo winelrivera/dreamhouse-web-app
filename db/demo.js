@@ -36,7 +36,7 @@ module.exports = function(client) {
   );`);
 
 
-/*  client.query(`INSERT INTO broker__c (email__c, phone__c, name, mobile_phone__c, sfid, title__c, picture__c) VALUES ('caroline@ionicrealty.com', '617-244-3672', 'Caroline Kingsley', '617-244-3672', 'a0036000003SsJwAAK', 'Senior Broker', 'https://s3-us-west-1.amazonaws.com/sfdc-demo/people/caroline_kingsley.jpg');`);
+  client.query(`INSERT INTO broker__c (email__c, phone__c, name, mobile_phone__c, sfid, title__c, picture__c) VALUES ('caroline@ionicrealty.com', '617-244-3672', 'Caroline Kingsley', '617-244-3672', 'a0036000003SsJwAAK', 'Senior Broker', 'https://s3-us-west-1.amazonaws.com/sfdc-demo/people/caroline_kingsley.jpg');`);
   client.query(`INSERT INTO broker__c (email__c, phone__c, name, mobile_phone__c, sfid, title__c, picture__c) VALUES ('jen@ionicrealty.com', '617-244-3672', 'Jennifer Wu', '617-244-3672', 'a0036000003SsJzAAK', 'Senior Broker', 'https://s3-us-west-1.amazonaws.com/sfdc-demo/people/jennifer_wu.jpg');`);
   client.query(`INSERT INTO broker__c (email__c, phone__c, name, mobile_phone__c, sfid, title__c, picture__c) VALUES ('michael@ionicrealty.com', '617-244-3672', 'Michael Jones', '617-244-3672', 'a0036000003SsJxAAK', 'Senior Broker', 'https://s3-us-west-1.amazonaws.com/sfdc-demo/people/michael_jones.jpg');`);
   client.query(`INSERT INTO broker__c (email__c, phone__c, name, mobile_phone__c, sfid, title__c, picture__c) VALUES ('michelle@ionicrealty.com', '617-244-3672', 'Michelle Lambert', '617-244-3672', 'a0036000003SsK2AAK', 'Senior Broker', 'https://s3-us-west-1.amazonaws.com/sfdc-demo/people/michelle_lambert.jpg');`);
@@ -58,6 +58,6 @@ module.exports = function(client) {
   client.query(`INSERT INTO property__c (name, thumbnail__c, beds__c, location__longitude__s, address__c, baths__c, broker__c, description__c, sfid, state__c, city__c, zip__c, title__c, picture__c, price__c, location__latitude__s) VALUES ('127 Endicott st', 'https://s3-us-west-1.amazonaws.com/sfdc-demo/realty/house07sq.jpg', 3, -71.0573519999999945, '127 Endicott st', 1, 'a0036000003SsK2AAK', 'Lorem ipsum dolor sit amet', 'a0236000002NHKyAAO', 'MA', 'Boston', '02420', 'City Living', 'https://s3-us-west-1.amazonaws.com/sfdc-demo/realty/house07.jpg', 450000, 42.3650030000000015);`);
   client.query(`INSERT INTO property__c (name, thumbnail__c, beds__c, location__longitude__s, address__c, baths__c, broker__c, description__c, sfid, state__c, city__c, zip__c, title__c, picture__c, price__c, location__latitude__s) VALUES ('121 Harborwalk', 'https://s3-us-west-1.amazonaws.com/sfdc-demo/realty/house09sq.jpg', 3, -71.0493270000000052, '121 Harborwalk', 3, 'a0036000003SsJwAAK', 'Lorem ipsum dolor sit amet', 'a0236000002NHKpAAO', 'MA', 'Boston', '02420', 'Seaport District Retreat', 'https://s3-us-west-1.amazonaws.com/sfdc-demo/realty/house09.jpg', 450000, 42.3569499999999977);`);
 
-  client.query(`INSERT INTO favorite__c (id__c, property__c, sfid) VALUES (uuid_generate_v4(), 'a0236000002NHKoAAO', 'a0136000003SsewAAC');`);*/
+  client.query(`INSERT INTO favorite__c (id__c, property__c, sfid) VALUES (uuid_generate_v4(), 'a0236000002NHKoAAO', 'a0136000003SsewAAC');`);
 
 };
