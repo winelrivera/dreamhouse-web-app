@@ -27,14 +27,14 @@ var brokerTable = 'broker__c';
 var user__c = 'c1';
 
 // setup the demo data if needed
-client.query('SELECT * FROM salesforce.broker__c', function(error, data) {
+/*client.query('SELECT * FROM salesforce.broker__c', function(error, data) {
   if (error !== null) {
     client.query('SELECT * FROM broker__c', function(error, data) {
-     // if (error !== null) {
-      //  console.log('Loading Demo Data...');
-      //  require('./db/demo.js')(client);
-      //  console.log('Done Loading Demo Data!');
-    //  }
+      if (error !== null) {
+        console.log('Loading Demo Data...');
+        require('./db/demo.js')(client);
+       console.log('Done Loading Demo Data!');
+     }
     });
   }
  else {
@@ -50,7 +50,7 @@ client.query('SELECT * FROM salesforce.broker__c', function(error, data) {
       }).user__c;
     });
   }
-});
+});*/
 
 
 
