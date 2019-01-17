@@ -49,7 +49,7 @@ var user__c = 'c1';
         return (prev.count < current.count) ? prev : current;
       }).user__c;
     });
-  }
+  //}
 });
 
 
