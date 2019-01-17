@@ -27,17 +27,17 @@ var brokerTable = 'broker__c';
 var user__c = 'c1';
 
 // setup the demo data if needed
-/*client.query('SELECT * FROM salesforce.broker__c', function(error, data) {
+client.query('SELECT * FROM salesforce.broker__c', function(error, data) {
   if (error !== null) {
     client.query('SELECT * FROM broker__c', function(error, data) {
-      if (error !== null) {
-        console.log('Loading Demo Data...');
-        require('./db/demo.js')(client);
-        console.log('Done Loading Demo Data!');
-      }
-    });*/
-//  }
- // else {
+     // if (error !== null) {
+      //  console.log('Loading Demo Data...');
+      //  require('./db/demo.js')(client);
+      //  console.log('Done Loading Demo Data!');
+    //  }
+    });
+  }
+ else {
     var schema = 'salesforce.';
     propertyTable = schema + 'property__c';
     favoriteTable = schema + 'favorite__c';
@@ -49,7 +49,7 @@ var user__c = 'c1';
         return (prev.count < current.count) ? prev : current;
       }).user__c;
     });
-  //}
+  }
 });
 
 
