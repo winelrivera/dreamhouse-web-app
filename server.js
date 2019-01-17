@@ -36,8 +36,8 @@ var user__c = 'c1';
         console.log('Done Loading Demo Data!');
       }
     });*/
-  }
-  else {
+//  }
+ // else {
     var schema = 'salesforce.';
     propertyTable = schema + 'property__c';
     favoriteTable = schema + 'favorite__c';
