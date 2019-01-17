@@ -1,4 +1,4 @@
-module.exports = function(client) {
+/*module.exports = function(client) {
 
   client.query(`CREATE TABLE broker__c (
    sfid CHARACTER VARYING(18) UNIQUE,
@@ -60,4 +60,4 @@ module.exports = function(client) {
 
   client.query(`INSERT INTO favorite__c (id__c, property__c, sfid) VALUES (uuid_generate_v4(), 'a0236000002NHKoAAO', 'a0136000003SsewAAC');`);
 
-};
+};*/
