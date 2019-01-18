@@ -44,13 +44,14 @@ var user__c = 'c1';
     brokerTable = schema + 'broker__c';
 
     // become the user with the least favorites
-/*console.log('aqui va el log  ------------------------------------------------------> ' +schema);
+console.log('aqui va el log  ------------------------------------------------------> ' +schema);
     client.query('SELECT user__c, COUNT(property__c) FROM salesforce.favorite__c GROUP BY user__c', function(error, data) {
+      if(user__c != null){
       user__c = data.rows.reduce(function(prev, current) {
         return (prev.count < current.count) ? prev : current;
-      }).user__c;
+      } }).user__c;
       console.log('aqui va el log  ------------------------------------------------------> '+user__c);
-    });*/
+    });
  // }
 //});
 
