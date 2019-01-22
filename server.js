@@ -50,7 +50,7 @@ console.log('aqui va el log  ---------------------------------------------------
       if(user__c != null){
       user__c = data.rows.reduce(function(prev, current) {
         return (prev.count < current.count) ? prev : current;
-      },
+      
                                  }).user__c;
       console.log('aqui va el log  ------------------------------------------------------> '+user__c);
     });
