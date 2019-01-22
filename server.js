@@ -47,7 +47,7 @@ var user__c = 'c1';
 console.log('aqui va el log  ------------------------------------------------------> ' +schema);
     client.query('SELECT user__c, COUNT(property__c) FROM salesforce.favorite__c GROUP BY user__c', function(error, data) {
       console.log('aqui va el log  ------------------------------------------------------> ' +user__c);
-      if(user__c != null){
+      if(user__c != null)
       user__c = data.rows.reduce(function(prev, current) {
         return (prev.count < current.count) ? prev : current;
       
